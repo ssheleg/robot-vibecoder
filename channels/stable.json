@@ -1,12 +1,12 @@
 {
   "channel": "stable",
-  "version": "v1.2.0-rc2",
-  "url": "https://github.com/ssheleg/robot-vibecoder/releases/download/v1.2.0-rc2/robot-vibecoder-v1.2.0-rc2.tar.gz",
-  "sig_url": "https://github.com/ssheleg/robot-vibecoder/releases/download/v1.2.0-rc2/robot-vibecoder-v1.2.0-rc2.tar.gz.sig",
-  "sha256": "0a1af6eb03e932a3f362bd6a3399e3eb4f699788b360c297dc08feab1d553b33",
+  "version": "v1.2.0",
+  "url": "https://github.com/ssheleg/robot-vibecoder/releases/download/v1.2.0/robot-vibecoder-v1.2.0.tar.gz",
+  "sig_url": "https://github.com/ssheleg/robot-vibecoder/releases/download/v1.2.0/robot-vibecoder-v1.2.0.tar.gz.sig",
+  "sha256": "a71b3496d9250a735f472d9d24b148860beb78ac4cee021e9258243091520a35",
   "arch": "aarch64",
   "min_ram_mb": 1800,
   "unsupported_models": ["Zero"],
-  "published_at": "2026-08-30T14:34:24Z",
-  "notes_url": "https://github.com/ssheleg/robot-vibecoder/releases/tag/v1.2.0-rc2"
+  "published_at": "2026-08-30T14:52:41Z",
+  "notes_url": "https://github.com/ssheleg/robot-vibecoder/releases/tag/v1.2.0"
 }
