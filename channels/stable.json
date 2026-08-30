@@ -3,10 +3,10 @@
   "version": "v1.2.0",
   "url": "https://github.com/ssheleg/robot-vibecoder/releases/download/v1.2.0/robot-vibecoder-v1.2.0.tar.gz",
   "sig_url": "https://github.com/ssheleg/robot-vibecoder/releases/download/v1.2.0/robot-vibecoder-v1.2.0.tar.gz.sig",
-  "sha256": "a71b3496d9250a735f472d9d24b148860beb78ac4cee021e9258243091520a35",
+  "sha256": "7ce480f9afdff4f1d687f4b02ba8458077728dc83b673c789de5060bc14e9ba3",
   "arch": "aarch64",
   "min_ram_mb": 1800,
   "unsupported_models": ["Zero"],
-  "published_at": "2026-08-30T14:52:41Z",
+  "published_at": "2026-08-30T15:09:19Z",
   "notes_url": "https://github.com/ssheleg/robot-vibecoder/releases/tag/v1.2.0"
 }
