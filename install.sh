@@ -24,6 +24,12 @@ PUBLIC_REPO="${ROBOT_PUBLIC_REPO:-ssheleg/robot-vibecoder}"
 RAW="https://raw.githubusercontent.com/$PUBLIC_REPO/main"
 CHANNEL="${ROBOT_CHANNEL:-stable}"
 TARGET="${ROBOT_TARGET_DIR:-$HOME/rpi-ai-assistant}"
+# Preflight: пройти ВСЕ проверки (железо, манифест, загрузка, подпись) и
+# остановиться перед первым изменением системы. Нужен и человеку («подойдёт
+# ли мне?»), и тестам: у установщика есть побочные эффекты ВНЕ целевой папки
+# (файл доверия, переключение источника обновлений), и прогон «понарошку» с
+# подменённой целью их бы не удержал.
+DRY_RUN="${ROBOT_INSTALL_DRY_RUN:-0}"
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
 
@@ -81,9 +87,19 @@ ssh-keygen -Y verify -f "$WORK/allowed_signers" -I releases@robot-vibecoder \
    Ничего не установлено — это правильное поведение, а не сбой."
 log "    подпись верна ✓"
 
+if [ "$DRY_RUN" = "1" ]; then
+  log "preflight пройден: железо подходит, сборка $VERSION скачана, ПОДПИСЬ ВЕРНА"
+  log "система не изменена (ROBOT_INSTALL_DRY_RUN=1). Убери флаг, чтобы поставить."
+  exit 0
+fi
+
 log "7/7 распаковка и установка"
 tar -xzf "$WORK/bundle.tar.gz" -C "$WORK"
-SRC="$(find "$WORK" -maxdepth 2 -name deploy.sh -path '*/scripts/*' -print -quit)"
+# maxdepth 3: архив несёт префикс `robot-vibecoder/`, значит путь — это
+# WORK/robot-vibecoder/scripts/deploy.sh (три уровня). С maxdepth 2 установщик
+# доходил до конца, проверял подпись и падал на последнем шаге — поймано
+# живым прогоном на устройстве 2026-08-30.
+SRC="$(find "$WORK" -maxdepth 3 -name deploy.sh -path '*/scripts/*' -print -quit)"
 [ -n "$SRC" ] || die "в архиве нет scripts/deploy.sh"
 SRC="$(dirname "$(dirname "$SRC")")"
 [ -e "$TARGET" ] && mv "$TARGET" "$TARGET.pre-install.$(date +%s)"
